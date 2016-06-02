@@ -42,37 +42,41 @@ public class GraficoVendasFragment extends Fragment {
 
         ButterKnife.bind(this, view);
 
-
         VendasDao dao = new VendasDao(getContext());
         List<Venda> vendas = dao.listar();
         dao.close();
 
-        List<Venda> doDia = new ArrayList<>();
-        Calendar dia = geraData(vendas.get(0));
+        if (vendas.size() > 0) {
+            List<Venda> doDia = new ArrayList<>();
 
-        LineSet dataSet = new LineSet();
 
-        for (Venda venda : vendas) {
+            Calendar dia = geraData(vendas.get(0));
 
-            if (venda.isMesmoDia(dia)) {
-                doDia.add(venda);
-            } else {
-                dia = geraData(venda);
+            LineSet dataSet = new LineSet();
 
-                dataSet.addPoint(new Point(doDia.get(0).getDataVenda(), doDia.size()));
+            for (Venda venda : vendas) {
 
-                doDia = new ArrayList<>();
-                doDia.add(venda);
+                if (venda.isMesmoDia(dia)) {
+                    doDia.add(venda);
+                } else {
+                    dia = geraData(venda);
+
+                    dataSet.addPoint(new Point(doDia.get(0).getDataVenda(), doDia.size()));
+
+                    doDia = new ArrayList<>();
+                    doDia.add(venda);
+                }
+
             }
 
+            dataSet.addPoint(new Point(doDia.get(0).getDataVenda(), doDia.size()));
+            dataSet.setColor(Color.BLUE);
+            grafico.addData(dataSet);
+
+            grafico.setBackgroundColor(Color.TRANSPARENT);
+            grafico.show();
         }
 
-        dataSet.addPoint(new Point(doDia.get(0).getDataVenda(), doDia.size()));
-        dataSet.setColor(Color.BLUE);
-        grafico.addData(dataSet);
-
-        grafico.setBackgroundColor(Color.TRANSPARENT);
-        grafico.show();
         return view;
     }
 

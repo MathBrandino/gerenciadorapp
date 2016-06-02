@@ -38,30 +38,32 @@ public class GraficoClientesFragment extends Fragment {
 
         ButterKnife.bind(this, view);
 
-        BarSet barSet = new BarSet();
-
         VendasDao dao = new VendasDao(getContext());
         List<ClienteQtd> clienteQtds = dao.listarClienteQtdVenda();
         dao.close();
 
-        int contador = 1;
+        if (clienteQtds.size() > 0) {
 
-        for (ClienteQtd clienteQtd : clienteQtds) {
+            BarSet barSet = new BarSet();
+            int contador = 1;
 
-            ClienteDao clienteDao = new ClienteDao(getContext());
-            Cliente cliente = clienteDao.recuperaCliente(clienteQtd.getId());
-            clienteDao.close();
+            for (ClienteQtd clienteQtd : clienteQtds) {
 
-            Bar bar = new Bar(cliente.getNome(), clienteQtd.getQtd());
-            bar.setColor(contador % 2 == 0 ? Color.YELLOW : Color.RED);
-            contador++;
+                ClienteDao clienteDao = new ClienteDao(getContext());
+                Cliente cliente = clienteDao.recuperaCliente(clienteQtd.getId());
+                clienteDao.close();
 
-            barSet.addBar(bar);
+                Bar bar = new Bar(cliente.getNome(), clienteQtd.getQtd());
+                bar.setColor(contador % 2 == 0 ? Color.YELLOW : Color.RED);
+                contador++;
+
+                barSet.addBar(bar);
+            }
+
+
+            grafico.addData(barSet);
+            grafico.show();
         }
-
-        grafico.addData(barSet);
-
-        grafico.show();
         return view;
     }
 }

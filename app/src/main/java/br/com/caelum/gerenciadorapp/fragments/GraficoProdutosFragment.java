@@ -37,29 +37,32 @@ public class GraficoProdutosFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_grafico_produtos, container, false);
         ButterKnife.bind(this, view);
 
-        BarSet barSet = new BarSet();
-        int contador = 1;
-
         VendasProdutoDao dao = new VendasProdutoDao(getContext());
         List<ProdutoQtd> qtds = dao.listar();
         dao.close();
 
+        if (qtds.size() > 0) {
 
-        for (ProdutoQtd qtd : qtds) {
-            ProdutoDao produtoDao = new ProdutoDao(getContext());
-            Produto produto = produtoDao.recuperaProduto(qtd.getIdProduto());
-            produtoDao.close();
+            BarSet barSet = new BarSet();
+            int contador = 1;
+
+            for (ProdutoQtd qtd : qtds) {
+                ProdutoDao produtoDao = new ProdutoDao(getContext());
+                Produto produto = produtoDao.recuperaProduto(qtd.getIdProduto());
+                produtoDao.close();
 
 
-            Bar bar = new Bar(produto.getNome(), qtd.getQtd());
-            bar.setColor(contador % 2 == 0 ? Color.BLUE : Color.GREEN);
-            barSet.addBar(bar);
-            contador++;
+                Bar bar = new Bar(produto.getNome(), qtd.getQtd());
+                bar.setColor(contador % 2 == 0 ? Color.BLUE : Color.GREEN);
+                barSet.addBar(bar);
+                contador++;
+            }
+
+
+            grafico.addData(barSet);
+
+            grafico.show();
         }
-
-        grafico.addData(barSet);
-        grafico.show();
-
         return view;
     }
 }
