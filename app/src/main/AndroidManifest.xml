@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="br.com.caelum.gerenciadorapp">
+
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/empresa"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".activity.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.cliente.ListaClienteActivity"
+            android:label="Clientes" />
+        <activity
+            android:name=".activity.cliente.FormularioClienteActivity"
+            android:label="Formulario Cliente"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".activity.produtos.FormularioProdutosActivity"
+            android:label="Formulario Produto" />
+        <activity
+            android:name=".activity.produtos.ProdutosActivity"
+            android:label="Produtos" />
+        <activity
+            android:name=".activity.venda.ListaVendasActivity"
+            android:label="Vendas" />
+        <activity
+            android:name=".activity.venda.FormularioVendaActivity"
+            android:label="Cadastro Venda"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.contas.ContasActivity"
+            android:label="Contas" />
+        <activity
+            android:name=".activity.contas.CadastroPagamentoActivity"
+            android:label="Cadastro Pagamentos"
+            android:windowSoftInputMode="stateHidden"></activity>
+        <activity android:name=".activity.grafico.GraficoActivity" android:label="Gráficos"/>
+
+    </application>
+
+</manifest>
