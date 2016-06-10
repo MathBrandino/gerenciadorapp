@@ -196,6 +196,11 @@ public class FormularioVendaActivity extends AppCompatActivity {
 
     private boolean validaCampos() {
 
+        if (cliente == null) {
+            Toast.makeText(this, "Você precisa de um cliente ", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
         if (itens.isEmpty()) {
             Toast.makeText(this, "Nenhum produto foi adicionado", Toast.LENGTH_LONG).show();
             return false;
@@ -217,5 +222,5 @@ public class FormularioVendaActivity extends AppCompatActivity {
         return venda;
     }
 
-  }
+}
 

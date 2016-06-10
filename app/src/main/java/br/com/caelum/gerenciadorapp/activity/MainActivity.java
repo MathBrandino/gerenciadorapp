@@ -4,6 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.CalendarView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import br.com.caelum.gerenciadorapp.R;
 import br.com.caelum.gerenciadorapp.activity.cliente.ListaClienteActivity;
@@ -32,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         Permissao.fazPermissao(this);
-
     }
 
     @OnClick(R.id.botao_produto)
